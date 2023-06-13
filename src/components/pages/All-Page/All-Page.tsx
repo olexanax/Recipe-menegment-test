@@ -1,7 +1,8 @@
+import CardList from "../../Card-List/Card-List";
 import React from "react";
 
-const AllPage = () => {
-    return <div>AllPage</div>;
+const AllPage: React.FC = () => {
+    return <CardList />;
 };
 
 export default AllPage;

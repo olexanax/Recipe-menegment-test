@@ -1,7 +1,13 @@
-import React from "react";
+import CardList from "../../Card-List/Card-List";
+import Form from "../../Form/Form";
 
 const SavedPage = () => {
-    return <div>SavedPage</div>;
+    return (
+        <>
+            <Form />
+            <CardList />
+        </>
+    );
 };
 
 export default SavedPage;
