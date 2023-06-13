@@ -1,7 +1,7 @@
 import React from "react";
 
-const AboutRecipe = () => {
-    return <div>AboutRecipe</div>;
+const AboutRecipePage = () => {
+    return <div>AboutRecipePage</div>;
 };
 
-export default AboutRecipe;
+export default AboutRecipePage;

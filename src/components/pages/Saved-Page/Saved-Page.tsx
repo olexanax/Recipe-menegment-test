@@ -1,7 +1,7 @@
 import React from "react";
 
-const Saved = () => {
-    return <div>Saved</div>;
+const SavedPage = () => {
+    return <div>SavedPage</div>;
 };
 
-export default Saved;
+export default SavedPage;

@@ -1,7 +1,7 @@
 import React from "react";
 
-const All = () => {
-    return <div>All</div>;
+const AllPage = () => {
+    return <div>AllPage</div>;
 };
 
-export default All;
+export default AllPage;
