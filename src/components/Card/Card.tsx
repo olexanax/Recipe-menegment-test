@@ -1,9 +1,11 @@
 import { Typography, Button } from "antd";
 import { SaveFilled } from "@ant-design/icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const { Title, Text } = Typography;
 
 const Card = () => {
+    const { isAuthenticated } = useAuth0();
     return (
         <li className=" w-[500px] h-[500px] border rounded p-2 bg-white  flex flex-col items-center relative">
             <Title level={2} className="mb-2">
@@ -24,7 +26,7 @@ const Card = () => {
                 delectus blanditiis ratione optio mollitia. Magnam unde iusto
                 quam itaque adipisci omnis.
             </p>
-            <Button className="mt-auto">
+            <Button disabled={!isAuthenticated} className="mt-auto">
                 <SaveFilled /> Save
             </Button>
             {/* <p className="absolute top-1 right-1 ">Your</p>
