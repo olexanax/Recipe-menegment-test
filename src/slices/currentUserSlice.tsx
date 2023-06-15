@@ -52,6 +52,40 @@ export const unFavoriteRecipe = createAsyncThunk(
     }
 );
 
+export const addOwnRecipe = createAsyncThunk(
+    "currentUser/addOwnRecipe",
+    async ({ userId, recipe }: { userId: string; recipe: SavedRecipe }) => {
+        const { request } = useHttp();
+        const users: User[] = await request(
+            `https://6488bf090e2469c038fe4bc4.mockapi.io/users`
+        );
+        const user = users.find((someUser: User) => someUser.mail === userId);
+        user!.ownReciptes.push(recipe);
+        return await request(
+            `https://6488bf090e2469c038fe4bc4.mockapi.io/users/${user?.id}`,
+            "PUT",
+            JSON.stringify(user)
+        );
+    }
+);
+export const removeOwnRecipe = createAsyncThunk(
+    "currentUser/removeOwnRecipe",
+    async ({ userId, recipeId }: { userId: string; recipeId: string }) => {
+        const { request } = useHttp();
+        const users: User[] = await request(
+            `https://6488bf090e2469c038fe4bc4.mockapi.io/users`
+        );
+        const user = users.find((someUser: User) => someUser.mail === userId);
+        user!.ownReciptes = user!.ownReciptes.filter(
+            (someRecipe) => someRecipe.id !== recipeId
+        );
+        return await request(
+            `https://6488bf090e2469c038fe4bc4.mockapi.io/users/${user?.id}`,
+            "PUT",
+            JSON.stringify(user)
+        );
+    }
+);
 const currentUserSlice = createSlice({
     name: "currentUser",
     initialState,
@@ -93,6 +127,25 @@ const currentUserSlice = createSlice({
             })
             .addCase(unFavoriteRecipe.rejected, (state) => {
                 console.log("remove recipe error");
+            })
+            .addCase(addOwnRecipe.pending, (state) => {
+                console.log("add own recipe loading");
+            })
+            .addCase(addOwnRecipe.fulfilled, (state, { payload }) => {
+                console.log(payload);
+                state.currentUser = payload;
+            })
+            .addCase(addOwnRecipe.rejected, (state) => {
+                console.log("add own recipe error");
+            })
+            .addCase(removeOwnRecipe.pending, (state) => {
+                console.log("remove own recipe loading");
+            })
+            .addCase(removeOwnRecipe.fulfilled, (state, { payload }) => {
+                state.currentUser = payload;
+            })
+            .addCase(removeOwnRecipe.rejected, (state) => {
+                console.log("remove own recipe error");
             })
             .addDefaultCase(() => {});
     },

@@ -20,7 +20,7 @@ const SavedList: React.FC = () => {
                       .sort((a, b) => {
                           const dateA = new Date(a.createdAt);
                           const dateB = new Date(b.createdAt);
-                          return dateA.getTime() - dateB.getTime();
+                          return dateB.getTime() - dateA.getTime();
                       })
                       .filter((recipe) =>
                           recipe.name.toLowerCase().includes(search)
@@ -29,7 +29,8 @@ const SavedList: React.FC = () => {
     );
     const savedIdsSelector = createSelector(
         (state: RootState) => state.currentUser.currentUser?.savedRecipes,
-        (items) => items?.map((recipe) => recipe.id)
+        (state: RootState) => state.currentUser.currentUser?.ownReciptes,
+        (saved, own) => saved?.concat(own!).map((recipe) => recipe.id)
     );
     const savedIDs = useSelector(savedIdsSelector);
     const recipes = useSelector(recipesSelector);

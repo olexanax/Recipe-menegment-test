@@ -82,3 +82,11 @@ export interface FilterProps {
     listType: "saved" | "general" | "all";
 }
 export type FilterTypes = "own" | "favorite" | "all";
+export type Inputs = {
+    name: string;
+    manual: string;
+    avatar: string;
+    cookingTime: string;
+    description: string;
+    ingredients: string;
+};

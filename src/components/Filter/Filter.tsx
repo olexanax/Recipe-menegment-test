@@ -31,7 +31,7 @@ const Filter: React.FC<FilterProps> = ({ listType }) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
         >
-            <Radio.Button value="all">all</Radio.Button>
+            <Radio.Button value="all">All</Radio.Button>
             <Radio.Button value="own">Own</Radio.Button>
             <Radio.Button value="favorite">Favorite</Radio.Button>
         </Radio.Group>

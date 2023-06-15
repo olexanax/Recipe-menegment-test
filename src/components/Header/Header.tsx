@@ -52,7 +52,9 @@ const Header = () => {
 
     return (
         <div className="w-full flex justify-between h-20 p-4">
-            <Title>LOGO</Title>
+            <Link to="/">
+                <Title>LOGO</Title>
+            </Link>
             <Menu
                 mode="horizontal"
                 items={items}
