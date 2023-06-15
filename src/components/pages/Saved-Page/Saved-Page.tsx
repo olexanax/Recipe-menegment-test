@@ -1,11 +1,14 @@
-import CardList from "../../Card-List/Card-List";
+import SavedList from "../../Saved-List/Saved-List";
 import Form from "../../Form/Form";
+import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 
 const SavedPage = () => {
     return (
         <>
             <Form />
-            <CardList />
+            <ErrorBoundary>
+                <SavedList />
+            </ErrorBoundary>
         </>
     );
 };

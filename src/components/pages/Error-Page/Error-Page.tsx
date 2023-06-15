@@ -1,8 +1,8 @@
 import { Typography } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-
-const { Title, Text } = Typography;
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+const { Text } = Typography;
 
 const ErrorPage: React.FC = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ const ErrorPage: React.FC = () => {
     };
     return (
         <>
-            <Title>Something is wrong :(</Title>
+            <ErrorMessage />
             <Text strong onClick={goBack}>
                 <ArrowLeftOutlined />
                 Back
