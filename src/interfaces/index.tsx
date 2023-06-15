@@ -1,3 +1,4 @@
+import Search from "antd/es/transfer/search";
 import store from "../store";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -68,3 +69,16 @@ export interface CardProps {
     listType: "saved" | "general";
     isSaved: boolean;
 }
+export interface filtersSliceInitialState {
+    allPageSearchTerm: string;
+    allPageFilterTerm: FilterTypes;
+    savePageSearchTerm: string;
+    savePageFilterTerm: FilterTypes;
+}
+export interface SearchProps {
+    listType: "saved" | "general";
+}
+export interface FilterProps {
+    listType: "saved" | "general" | "all";
+}
+export type FilterTypes = "own" | "favorite" | "all";

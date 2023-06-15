@@ -75,7 +75,8 @@ const Card: React.FC<CardProps> = ({
                 className="mt-auto"
                 onClick={onClick}
             >
-                <SaveFilled /> Save
+                <StarFilled />{" "}
+                {listType == "general" ? "Make favorite" : "Make unfavorite"}
             </Button>
             {isSaved && (
                 <Text type="success" className="absolute top-2 right-2 ">

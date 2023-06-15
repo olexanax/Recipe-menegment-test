@@ -13,8 +13,14 @@ const GeneralList: React.FC = () => {
         (state: RootState) => state.currentUser.currentUser?.savedRecipes,
         (items) => items?.map((recipe) => recipe.id)
     );
+    const recipesSelector = createSelector(
+        (state: RootState) => state.general.recipes,
+        (state: RootState) => state.filters.allPageSearchTerm,
+        (list, search) =>
+            list.filter((recipe) => recipe.name.toLowerCase().includes(search))
+    );
     const dispatch = useDispatch<AppDispatch>();
-    const data = useSelector((state: RootState) => state.general.recipes);
+    const data = useSelector(recipesSelector);
     const savedIDs = useSelector(savedIdsSelector);
     const status = useSelector(
         (state: RootState) => state.general.recipeLoadinfStatus

@@ -1,26 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { CardProps } from "antd";
-import { RootState } from "../../interfaces";
+import { RootState, FilterTypes } from "../../interfaces";
 import { useEffect } from "react";
 import Card from "../Card/Card";
 const SavedList: React.FC = () => {
     const recipesSelector = createSelector(
         (state: RootState) => state.currentUser.currentUser?.savedRecipes,
         (state: RootState) => state.currentUser.currentUser?.ownReciptes,
-        (saved, favorite) =>
-            [...(saved || []), ...(favorite || [])].sort((a, b) => {
-                const dateA = new Date(a.createdAt);
-                const dateB = new Date(b.createdAt);
-                return dateA.getTime() - dateB.getTime();
-            })
+        (state: RootState) => state.filters.savePageFilterTerm,
+        (state: RootState) => state.filters.savePageSearchTerm,
+        (saved, own, filter, search) =>
+            filter === "all"
+                ? [...(saved || []), ...(own || [])]
+                : filter === "own"
+                ? [...(own || [])]
+                : filter == "favorite"
+                ? [...(saved || [])]
+                      .sort((a, b) => {
+                          const dateA = new Date(a.createdAt);
+                          const dateB = new Date(b.createdAt);
+                          return dateA.getTime() - dateB.getTime();
+                      })
+                      .filter((recipe) =>
+                          recipe.name.toLowerCase().includes(search)
+                      )
+                : []
     );
     const savedIdsSelector = createSelector(
         (state: RootState) => state.currentUser.currentUser?.savedRecipes,
         (items) => items?.map((recipe) => recipe.id)
     );
     const savedIDs = useSelector(savedIdsSelector);
-
     const recipes = useSelector(recipesSelector);
 
     return (
