@@ -1,5 +1,5 @@
 import { Typography, Button } from "antd";
-import { StarFilled, DeleteFilled } from "@ant-design/icons";
+import { StarFilled, DeleteFilled, EditOutlined } from "@ant-design/icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import {
@@ -10,6 +10,7 @@ import {
 import { useEffect } from "react";
 import { CardProps } from "../../interfaces/index";
 import { AppDispatch } from "../../interfaces/index";
+import { Link } from "react-router-dom";
 const { Title, Text } = Typography;
 
 const Card: React.FC<CardProps> = ({
@@ -71,32 +72,19 @@ const Card: React.FC<CardProps> = ({
                         );
                         break;
                 }
-                // type == "general"
-                //     ? dispatch(
-                //           unFavoriteRecipe({
-                //               userId: user?.email!,
-                //               recipeId: id,
-                //           })
-                //       )
-                //     : dispatch(
-                //           removeOwnRecipe({
-                //               userId: user?.email!,
-                //               recipeId: id,
-                //           })
-                //       );
             }
         }
     };
 
     const unSaveButton =
-        type == "general" ? (
+        type === "general" ? (
             <>
                 <StarFilled />
                 Favorite
             </>
         ) : null;
     const removeOwnButton =
-        type == "own" ? (
+        type === "own" ? (
             <>
                 <DeleteFilled /> Delete own recipe
             </>
@@ -117,21 +105,34 @@ const Card: React.FC<CardProps> = ({
             </Text>
             <Text strong>Description:</Text>
             <Text>{description}</Text>
-            <Button
-                disabled={!isAuthenticated}
-                className="mt-auto"
-                onClick={onClick}
-            >
-                {removeOwnButton}
-                {unSaveButton}
-            </Button>
-            {isSaved && (
-                <Text type="success" className="absolute top-2 right-2 ">
-                    <StarFilled />
-                    Favorite
-                </Text>
-            )}
-            {/* <p className="absolute top-1 right-1">Own</p>  */}
+            <div className="mt-auto flex gap-2">
+                <Button disabled={!isAuthenticated} onClick={onClick}>
+                    {removeOwnButton}
+                    {unSaveButton}
+                </Button>
+                <Button disabled={!isAuthenticated}>
+                    {isAuthenticated ? (
+                        <Link to={`/recipt/${id}`}>Show more</Link>
+                    ) : (
+                        "Show more"
+                    )}
+                </Button>
+            </div>
+
+            <Text type="success" className="absolute top-2 right-2 text-xl">
+                {isSaved && type === "general" && (
+                    <>
+                        <StarFilled />
+                        Favorite
+                    </>
+                )}
+                {isSaved && type === "own" && (
+                    <>
+                        <EditOutlined />
+                        Own
+                    </>
+                )}
+            </Text>
         </li>
     );
 };

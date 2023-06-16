@@ -7,7 +7,7 @@ import {
     setCurrentUser,
     deleteCurrentUser,
 } from "../../slices/currentUserSlice";
-import { RootState, User } from "../../interfaces";
+import { User } from "../../interfaces";
 
 import Layout from "../Layout/Layout";
 import AllPage from "../pages/All-Page/All-Page";
@@ -74,7 +74,7 @@ function App() {
                     <Route index element={<AllPage />} />
                     <Route path="saved" element={<SavedPage />} />
                     <Route
-                        path="recipt/:reciptId"
+                        path="recipt/:recipeId"
                         element={<AboutRecipePage />}
                     />
                     <Route path="*" element={<ErrorPage />} />

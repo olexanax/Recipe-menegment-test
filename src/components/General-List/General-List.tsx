@@ -2,29 +2,23 @@ import Card from "../Card/Card";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useEffect } from "react";
-import { createSelector } from "@reduxjs/toolkit";
+import {
+    GeneralListSavedIdsSelector,
+    GeneralListRecipesSelector,
+} from "../../selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRecipes } from "../../slices/generalRecipesSlice";
 import { RootState } from "../../interfaces";
 import { AppDispatch } from "../../interfaces";
 
 const GeneralList: React.FC = () => {
-    const savedIdsSelector = createSelector(
-        (state: RootState) => state.currentUser.currentUser?.savedRecipes,
-        (items) => items?.map((recipe) => recipe.id)
-    );
-    const recipesSelector = createSelector(
-        (state: RootState) => state.general.recipes,
-        (state: RootState) => state.filters.allPageSearchTerm,
-        (list, search) =>
-            list.filter((recipe) => recipe.name.toLowerCase().includes(search))
-    );
     const dispatch = useDispatch<AppDispatch>();
-    const data = useSelector(recipesSelector);
-    const savedIDs = useSelector(savedIdsSelector);
+    const data = useSelector(GeneralListRecipesSelector);
+    const savedIDs = useSelector(GeneralListSavedIdsSelector);
     const status = useSelector(
         (state: RootState) => state.general.recipeLoadinfStatus
     );
+
     useEffect(() => {
         dispatch(fetchRecipes());
     }, []);
@@ -65,7 +59,7 @@ const GeneralList: React.FC = () => {
             {loading}
             {error}
             {content}
-            {!data.length && <p>unfortunately, list is empty</p>}
+            {!data.length && !loading && <p>unfortunately, list is empty</p>}
         </ul>
     );
 };
