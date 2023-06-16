@@ -35,6 +35,7 @@ const CardInfo: React.FC = () => {
                 }
             );
         }
+        //eslint-disable-next-line
     }, [ownRecipes]);
 
     const loading = status === "loading" || !recipe ? <Spinner /> : null;

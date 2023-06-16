@@ -22,6 +22,7 @@ const GeneralList: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchRecipes());
+        //eslint-disable-next-line
     }, []);
 
     const loading = status === "loading" && !data.length ? <Spinner /> : null;
@@ -50,7 +51,7 @@ const GeneralList: React.FC = () => {
                           key={id}
                           manual={manual}
                           listType="general"
-                          isSaved={savedIDs?.some((someId) => someId == id)!}
+                          isSaved={savedIDs?.some((someId) => someId === id)!}
                       />
                   )
               )

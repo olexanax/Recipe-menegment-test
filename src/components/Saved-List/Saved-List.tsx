@@ -50,7 +50,7 @@ const SavedList: React.FC = () => {
                             key={id}
                             manual={manual}
                             listType="saved"
-                            isSaved={savedIDs?.some((someId) => someId == id)!}
+                            isSaved={savedIDs?.some((someId) => someId === id)!}
                         />
                     )
                 )}

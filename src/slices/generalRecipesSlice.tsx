@@ -36,5 +36,5 @@ const generalRecipesSlice = createSlice({
     },
 });
 
-const { actions, reducer } = generalRecipesSlice;
+const { reducer } = generalRecipesSlice;
 export default reducer;
