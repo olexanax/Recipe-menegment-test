@@ -9,10 +9,12 @@ const BackButton: React.FC = () => {
         navigate(-1);
     };
     return (
-        <Text strong className="absolute left-4 top-4" onClick={goBack}>
+        <div className="absolute left-4 top-4 flex items-center gap-2">
             <ArrowLeftOutlined />
-            Back
-        </Text>
+            <Text strong onClick={goBack}>
+                Back
+            </Text>
+        </div>
     );
 };
 

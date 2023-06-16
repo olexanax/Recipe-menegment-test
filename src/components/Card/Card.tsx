@@ -1,5 +1,4 @@
-import { Typography, Button } from "antd";
-import { StarFilled, DeleteFilled, EditOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import {
@@ -7,9 +6,12 @@ import {
     unFavoriteRecipe,
     removeOwnRecipe,
 } from "../../slices/currentUserSlice";
+
 import { CardProps } from "../../interfaces/index";
 import { AppDispatch } from "../../interfaces/index";
-import { Link } from "react-router-dom";
+
+import { Typography, Button } from "antd";
+import { StarFilled, DeleteFilled, EditOutlined } from "@ant-design/icons";
 const { Title, Text } = Typography;
 
 const Card: React.FC<CardProps> = ({
@@ -27,6 +29,7 @@ const Card: React.FC<CardProps> = ({
     const { isAuthenticated } = useAuth0();
     const dispatch = useDispatch<AppDispatch>();
     const { user } = useAuth0();
+
     const onClick = () => {
         if (isAuthenticated) {
             if (listType === "general" && !isSaved) {
@@ -90,6 +93,7 @@ const Card: React.FC<CardProps> = ({
                 <DeleteFilled /> Delete own recipe
             </div>
         ) : null;
+
     return (
         <li className="w-full  sm:w-[500px] sm:h-[500px] border rounded p-2 bg-white  flex flex-col items-center relative hover:shadow-xl">
             <Title level={2} className="mb-2">

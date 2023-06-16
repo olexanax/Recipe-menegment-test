@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useDebounce } from "../../hooks/useDebounce";
+
 import { Input } from "antd";
 import {
     setAllPageSearchTerm,
@@ -25,6 +26,7 @@ const Search: React.FC<SearchProps> = ({ listType }) => {
             default:
                 return;
         }
+        //eslint-disable-next-line
     }, [debouncedValue]);
 
     return (

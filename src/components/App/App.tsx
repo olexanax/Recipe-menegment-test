@@ -1,21 +1,20 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useHttp } from "../../hooks/useHttp";
-import {
-    fetchCurrentUser,
-    setCurrentUser,
-    deleteCurrentUser,
-} from "../../slices/currentUserSlice";
-import { User } from "../../interfaces";
-
 import Layout from "../Layout/Layout";
 import AllPage from "../pages/All-Page/All-Page";
 import SavedPage from "../pages/Saved-Page/Saved-Page";
 import AboutRecipePage from "../pages/About-Recipe-Page/About-Recipe-Page";
 import ErrorPage from "../pages/Error-Page/Error-Page";
-import { AppDispatch } from "../../interfaces";
 
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHttp } from "../../hooks/useHttp";
+
+import {
+    fetchCurrentUser,
+    setCurrentUser,
+    deleteCurrentUser,
+} from "../../slices/currentUserSlice";
+import { User, AppDispatch } from "../../interfaces";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -65,6 +64,7 @@ function App() {
         } else {
             dispatch(deleteCurrentUser());
         }
+        //eslint-disable-next-line
     }, [isAuthenticated]);
 
     return (

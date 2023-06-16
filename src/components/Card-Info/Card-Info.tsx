@@ -1,14 +1,15 @@
-import { Typography, Checkbox } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useHttp } from "../../hooks/useHttp";
-import { statusSelector } from "../../selectors";
+import BackButton from "../BackButton/BackButton";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHttp } from "../../hooks/useHttp";
 import { useSelector } from "react-redux";
+
+import { Typography, Checkbox } from "antd";
 import { GeneralRecipe, SavedRecipe, RootState } from "../../interfaces";
-import BackButton from "../BackButton/BackButton";
+import { statusSelector } from "../../selectors";
 const { Title, Text } = Typography;
 
 const CardInfo: React.FC = () => {
@@ -35,15 +36,20 @@ const CardInfo: React.FC = () => {
             );
         }
     }, [ownRecipes]);
+
     const loading = status === "loading" || !recipe ? <Spinner /> : null;
     const error = status === "error" ? <ErrorMessage /> : null;
     const content =
         status === "idle" ? (
             <>
-                <Title>{recipe?.name}</Title>
+                <Title className="text-center">{recipe?.name}</Title>
 
-                <div className="w-full flex gap-10 justify-center">
-                    <img className="w-1/4" src={recipe?.avatar} alt="" />
+                <div className="flex flex-col sm:flex-row sm:gap-10 gap-4  justify-center items-center mb-4">
+                    <img
+                        className="w-1/2  object-cover"
+                        src={recipe?.avatar}
+                        alt=""
+                    />
                     <ul>
                         {recipe?.ingredients.map((item, i) => (
                             <li key={i}>
@@ -52,14 +58,15 @@ const CardInfo: React.FC = () => {
                         ))}
                     </ul>
                 </div>
-                <Title level={3}>How it cook?</Title>
+                {recipe ? <Title level={3}>How it cook?</Title> : null}
                 <Text>{recipe?.manual}</Text>
-                <Title level={3}>Description</Title>
+                {recipe ? <Title level={3}>Description</Title> : null}
                 <Text>{recipe?.description}</Text>
             </>
         ) : null;
+
     return (
-        <div className="relative flex flex-col items-center w-full">
+        <div className="relative p-4 flex flex-col items-center w-full">
             <BackButton />
             {loading}
             {error}

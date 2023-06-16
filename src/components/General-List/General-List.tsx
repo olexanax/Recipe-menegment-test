@@ -1,15 +1,16 @@
 import Card from "../Card/Card";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
     GeneralListSavedIdsSelector,
     GeneralListRecipesSelector,
 } from "../../selectors";
-import { useSelector, useDispatch } from "react-redux";
 import { fetchRecipes } from "../../slices/generalRecipesSlice";
-import { RootState } from "../../interfaces";
-import { AppDispatch } from "../../interfaces";
+import { RootState, AppDispatch } from "../../interfaces";
 
 const GeneralList: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -54,6 +55,7 @@ const GeneralList: React.FC = () => {
                   )
               )
             : null;
+
     return (
         <ul className="wrapper flex flex-wrap gap-5 justify-center p-2">
             {loading}

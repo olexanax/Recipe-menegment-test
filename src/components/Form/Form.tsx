@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { UpOutlined, DownOutlined } from "@ant-design/icons";
-import createId from "../../utils/createId";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Inputs, SavedRecipe } from "../../interfaces";
-import { addOwnRecipe } from "../../slices/currentUserSlice";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { AppDispatch } from "../../interfaces";
+import createId from "../../utils/createId";
+
+import { UpOutlined, DownOutlined } from "@ant-design/icons";
+import { Inputs, SavedRecipe, AppDispatch } from "../../interfaces";
+import { addOwnRecipe } from "../../slices/currentUserSlice";
 
 const Form: React.FC = () => {
     const [isHidden, setIsHidden] = useState<boolean>(true);

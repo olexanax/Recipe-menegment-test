@@ -1,4 +1,3 @@
-import Search from "antd/es/transfer/search";
 import store from "../store";
 
 export type RootState = ReturnType<typeof store.getState>;

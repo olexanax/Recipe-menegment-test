@@ -1,15 +1,13 @@
-import type { MenuProps } from "antd";
-import { Menu, Button, Typography } from "antd";
-import { SaveFilled, OrderedListOutlined } from "@ant-design/icons";
-import { Link, NavLink, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+
+import { Button, Typography } from "antd";
+import { SaveFilled, OrderedListOutlined } from "@ant-design/icons";
 import { RootState } from "../../interfaces";
 const { Title, Text } = Typography;
 
 const Header = () => {
-    const [current, setCurrent] = useState("all");
     const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
     const userLoadingStatus = useSelector(
         (state: RootState) => state.currentUser.userLoadingStatus

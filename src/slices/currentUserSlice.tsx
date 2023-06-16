@@ -99,6 +99,7 @@ const currentUserSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            ///fetchCurrentUser
             .addCase(fetchCurrentUser.pending, (state) => {
                 state.userLoadingStatus = "loading";
             })
@@ -109,6 +110,7 @@ const currentUserSlice = createSlice({
             .addCase(fetchCurrentUser.rejected, (state) => {
                 state.userLoadingStatus = "error";
             })
+            ///favoriteRecipe
             .addCase(favoriteRecipe.pending, (state) => {
                 console.log("add recipe loading");
             })
@@ -118,6 +120,7 @@ const currentUserSlice = createSlice({
             .addCase(favoriteRecipe.rejected, (state) => {
                 console.log("add recipe error");
             })
+            ///unFavoriteRecipe
             .addCase(unFavoriteRecipe.pending, (state) => {
                 console.log("remove recipe loading");
             })
@@ -128,6 +131,7 @@ const currentUserSlice = createSlice({
             .addCase(unFavoriteRecipe.rejected, (state) => {
                 console.log("remove recipe error");
             })
+            ///addOwnRecipe
             .addCase(addOwnRecipe.pending, (state) => {
                 console.log("add own recipe loading");
             })
@@ -138,6 +142,7 @@ const currentUserSlice = createSlice({
             .addCase(addOwnRecipe.rejected, (state) => {
                 console.log("add own recipe error");
             })
+            ///removeOwnRecipe
             .addCase(removeOwnRecipe.pending, (state) => {
                 console.log("remove own recipe loading");
             })

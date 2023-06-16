@@ -1,8 +1,9 @@
-import ReactDOM from "react-dom/client";
+import App from "./components/App/App";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
 import store from "./store";
-import App from "./components/App/App";
+
 import "./index.css";
 
 const root = ReactDOM.createRoot(
