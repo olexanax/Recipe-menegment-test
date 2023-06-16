@@ -55,7 +55,7 @@ const GeneralList: React.FC = () => {
               )
             : null;
     return (
-        <ul className="wrapper flex flex-wrap gap-2 justify-center p-2">
+        <ul className="wrapper flex flex-wrap gap-5 justify-center p-2">
             {loading}
             {error}
             {content}

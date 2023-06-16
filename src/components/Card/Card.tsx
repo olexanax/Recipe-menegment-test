@@ -7,7 +7,6 @@ import {
     unFavoriteRecipe,
     removeOwnRecipe,
 } from "../../slices/currentUserSlice";
-import { useEffect } from "react";
 import { CardProps } from "../../interfaces/index";
 import { AppDispatch } from "../../interfaces/index";
 import { Link } from "react-router-dom";
@@ -30,7 +29,6 @@ const Card: React.FC<CardProps> = ({
     const { user } = useAuth0();
     const onClick = () => {
         if (isAuthenticated) {
-            console.log(listType, isSaved);
             if (listType === "general" && !isSaved) {
                 dispatch(
                     favoriteRecipe({
@@ -52,7 +50,6 @@ const Card: React.FC<CardProps> = ({
                     })
                 );
             } else if (listType === "saved" && isSaved) {
-                console.log("yep");
                 switch (type) {
                     case "general":
                         dispatch(
@@ -76,21 +73,25 @@ const Card: React.FC<CardProps> = ({
         }
     };
 
-    const unSaveButton =
+    const saveButton =
         type === "general" ? (
-            <>
+            <div className="flex items-center">
                 <StarFilled />
-                Favorite
-            </>
+                {listType === "saved"
+                    ? "Make Unfavorite"
+                    : isSaved
+                    ? "Already Favorite"
+                    : "Make Favorite"}
+            </div>
         ) : null;
     const removeOwnButton =
         type === "own" ? (
-            <>
+            <div className="flex items-center">
                 <DeleteFilled /> Delete own recipe
-            </>
+            </div>
         ) : null;
     return (
-        <li className=" w-[500px] h-[500px] border rounded p-2 bg-white  flex flex-col items-center relative">
+        <li className="w-full  sm:w-[500px] sm:h-[500px] border rounded p-2 bg-white  flex flex-col items-center relative hover:shadow-xl">
             <Title level={2} className="mb-2">
                 {name}
             </Title>
@@ -108,7 +109,7 @@ const Card: React.FC<CardProps> = ({
             <div className="mt-auto flex gap-2">
                 <Button disabled={!isAuthenticated} onClick={onClick}>
                     {removeOwnButton}
-                    {unSaveButton}
+                    {saveButton}
                 </Button>
                 <Button disabled={!isAuthenticated}>
                     {isAuthenticated ? (
@@ -121,16 +122,16 @@ const Card: React.FC<CardProps> = ({
 
             <Text type="success" className="absolute top-2 right-2 text-xl">
                 {isSaved && type === "general" && (
-                    <>
+                    <div className="flex items-center">
                         <StarFilled />
                         Favorite
-                    </>
+                    </div>
                 )}
                 {isSaved && type === "own" && (
-                    <>
+                    <div className="flex items-center">
                         <EditOutlined />
                         Own
-                    </>
+                    </div>
                 )}
             </Text>
         </li>

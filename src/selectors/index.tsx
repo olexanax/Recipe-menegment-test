@@ -33,12 +33,12 @@ export const savedListRecipesSelector = createSelector(
             ? [...(saved || []), ...(own || [])]
             : filter === "own"
             ? [...(own || [])]
-            : filter == "favorite"
+            : filter === "favorite"
             ? [...(saved || [])]
                   .sort((a, b) => {
                       const dateA = new Date(a.createdAt);
                       const dateB = new Date(b.createdAt);
-                      return dateB.getTime() - dateA.getTime();
+                      return dateA.getTime() - dateB.getTime();
                   })
                   .filter((recipe) =>
                       recipe.name.toLowerCase().includes(search)

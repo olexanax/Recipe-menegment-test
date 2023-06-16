@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
-import { Input, Button } from "antd";
 import createId from "../../utils/createId";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Inputs, SavedRecipe } from "../../interfaces";
@@ -14,10 +13,11 @@ const Form: React.FC = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<Inputs>();
     const dispatch = useDispatch<AppDispatch>();
-    const { isAuthenticated, user } = useAuth0();
+    const { user } = useAuth0();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         const { name, description, avatar, manual, ingredients, cookingTime } =
@@ -31,7 +31,7 @@ const Form: React.FC = () => {
             description,
             manual,
             cookingTime: +cookingTime,
-            ingredients: ingredients.split(" "),
+            ingredients: ingredients.split(","),
             type: "own",
             id: createId(),
             progress: ingredients.split(" ").reduce((acc, item) => {
@@ -39,9 +39,11 @@ const Form: React.FC = () => {
             }, {}),
         };
         dispatch(addOwnRecipe({ userId: user?.email!, recipe }));
+        reset();
     };
+
     return (
-        <div className="w-[500px] bg-slate-600 rounded">
+        <div className="max-w-screen-sm w-full m-4 bg-slate-600 rounded">
             <div className=" flex justify-between text-white p-4">
                 <p>ADD YOUR OWN RECIPE</p>
                 {isHidden ? (
@@ -73,7 +75,7 @@ const Form: React.FC = () => {
                     <input
                         {...register("ingredients", { required: true })}
                         className="h-8 rounded p-1"
-                        placeholder="The ingredients(list with a space)"
+                        placeholder="The ingredients(writing through a comma)"
                     />
                     {errors.ingredients && <span>This field is required</span>}
 
@@ -85,8 +87,9 @@ const Form: React.FC = () => {
                     {errors.manual && <span>This field is required</span>}
                     <input
                         {...register("cookingTime", { required: true })}
+                        type="number"
                         className="h-8 rounded p-1"
-                        placeholder="Cooking Time"
+                        placeholder="Cooking Time (minutes)"
                     />
                     {errors.cookingTime && <span>This field is required</span>}
 

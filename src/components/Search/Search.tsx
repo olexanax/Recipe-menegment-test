@@ -29,8 +29,7 @@ const Search: React.FC<SearchProps> = ({ listType }) => {
 
     return (
         <Input
-            className="mt-2 mb-2 w-96
-            "
+            className="max-w-screen-sm w-full m-4"
             placeholder="Search"
             onChange={(e) => setValue(e.target.value)}
         />

@@ -15,6 +15,9 @@ const SavedList: React.FC = () => {
     const status = useSelector(
         (state: RootState) => state.currentUser.userLoadingStatus
     );
+    const user = useSelector(
+        (state: RootState) => state.currentUser.currentUser
+    );
     const { isAuthenticated } = useAuth0();
 
     const loading =
@@ -22,7 +25,7 @@ const SavedList: React.FC = () => {
     const error = status === "error" ? <ErrorMessage /> : null;
     const content =
         status === "idle" ? (
-            <ul className="wrapper flex flex-wrap gap-2 justify-center p-2">
+            <ul className="wrapper flex flex-wrap gap-5 justify-center p-2">
                 {recipes.map(
                     ({
                         name,
@@ -56,7 +59,7 @@ const SavedList: React.FC = () => {
             {loading}
             {error}
             {content}
-            {!recipes.length && !loading && <p>unfortunately, list is empty</p>}
+            {!recipes.length && user && <p>unfortunately, list is empty</p>}
         </ul>
     );
 };

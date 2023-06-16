@@ -1,8 +1,8 @@
 import type { MenuProps } from "antd";
 import { Menu, Button, Typography } from "antd";
 import { SaveFilled, OrderedListOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, NavLink, Navigate } from "react-router-dom";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { RootState } from "../../interfaces";
@@ -15,24 +15,6 @@ const Header = () => {
         (state: RootState) => state.currentUser.userLoadingStatus
     );
 
-    const onClick: MenuProps["onClick"] = (e) => {
-        setCurrent(e.key);
-    };
-
-    const items: MenuProps["items"] = [
-        {
-            label: <Link to="/">All</Link>,
-            key: "all",
-            icon: <OrderedListOutlined />,
-        },
-        {
-            label: isAuthenticated ? <Link to="/saved">Saved</Link> : "Saved",
-            key: "saved",
-            icon: <SaveFilled />,
-            disabled: !isAuthenticated,
-        },
-    ];
-
     const errorMessage =
         isAuthenticated && userLoadingStatus === "error" ? (
             <Text type="danger">Sign in error</Text>
@@ -41,9 +23,8 @@ const Header = () => {
         userLoadingStatus === "loading" ? <Text>loading...</Text> : null;
     const userData = isAuthenticated ? (
         <>
-            {" "}
-            <Text>{user?.email}</Text>
-            <img className="w-10" src={user?.picture} alt="" />
+            <Text className="hidden sm:block">{user?.email}</Text>
+            <img className="w-7 sm:w-10" src={user?.picture} alt="" />
         </>
     ) : null;
     const signInMessage = !isAuthenticated ? (
@@ -52,20 +33,40 @@ const Header = () => {
 
     return (
         <div className="w-full flex justify-between h-20 p-4">
-            <Link to="/">
+            <Link to="/" className="sm:block hidden">
                 <Title>LOGO</Title>
             </Link>
-            <Menu
-                mode="horizontal"
-                items={items}
-                onClick={onClick}
-                selectedKeys={[current]}
-            />
+            <div className="flex gap-8 items-center">
+                <NavLink
+                    to="/"
+                    className="flex items-center gap-1"
+                    style={({ isActive }) => ({
+                        color: isActive ? "#1890ff" : "inherit",
+                    })}
+                >
+                    <OrderedListOutlined />
+                    All
+                </NavLink>
+                <NavLink
+                    to="/saved"
+                    className={`flex items-center gap-1 ${
+                        !isAuthenticated
+                            ? "opacity-80 pointer-events-none"
+                            : null
+                    }`}
+                    style={({ isActive }) => ({
+                        color: isActive ? "#1890ff" : "inherit",
+                    })}
+                >
+                    <SaveFilled />
+                    Saved
+                </NavLink>
+                {signInMessage}
+            </div>
             <div className="flex gap-2 items-center">
                 {errorMessage}
                 {loadingMessage}
                 {userData}
-                {signInMessage}
                 <Button
                     onClick={() =>
                         !isAuthenticated ? loginWithRedirect() : logout()
