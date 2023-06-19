@@ -63,7 +63,6 @@ const Card: React.FC<CardProps> = ({
                         );
                         break;
                     case "own":
-                        console.log("own");
                         dispatch(
                             removeOwnRecipe({
                                 userId: user?.email!,
@@ -95,7 +94,7 @@ const Card: React.FC<CardProps> = ({
         ) : null;
 
     return (
-        <li className="w-full  sm:w-[500px] sm:h-[500px] border rounded p-2 bg-white  flex flex-col items-center relative hover:shadow-xl">
+        <li className="w-full  sm:w-[500px] sm:h-[500px] border rounded-2xl p-2 bg-white  flex flex-col items-center relative hover:shadow-xl">
             <Title level={2} className="mb-2">
                 {name}
             </Title>

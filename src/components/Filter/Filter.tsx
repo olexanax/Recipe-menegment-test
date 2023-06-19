@@ -33,9 +33,9 @@ const Filter: React.FC<FilterProps> = ({ listType }) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
         >
-            <Radio.Button value="All">All</Radio.Button>
-            <Radio.Button value="Own">Own</Radio.Button>
-            <Radio.Button value="Favorite">Favorite</Radio.Button>
+            <Radio.Button value="all">All</Radio.Button>
+            <Radio.Button value="own">Own</Radio.Button>
+            <Radio.Button value="favorite">Favorite</Radio.Button>
         </Radio.Group>
     );
 };

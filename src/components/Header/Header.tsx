@@ -30,7 +30,7 @@ const Header = () => {
     ) : null;
 
     return (
-        <div className="w-full flex justify-between h-20 p-4">
+        <div className="w-full flex justify-between items-center h-20 sm:p-4 p-2 sm:flex-row flex-col gap-2 ">
             <Link to="/" className="sm:block hidden">
                 <Title>LOGO</Title>
             </Link>
@@ -67,7 +67,10 @@ const Header = () => {
                 {userData}
                 <Button
                     onClick={() =>
-                        !isAuthenticated ? loginWithRedirect() : logout()
+                        !isAuthenticated
+                            ? loginWithRedirect()
+                            : // @ts-ignore
+                              logout()
                     }
                 >
                     {isAuthenticated ? "Sign Out" : "Sign In"}

@@ -43,7 +43,7 @@ const Form: React.FC = () => {
     };
 
     return (
-        <div className="max-w-screen-sm w-full m-4 bg-slate-600 rounded">
+        <div className="max-w-screen-sm w-full my-4 bg-slate-600 rounded">
             <div className=" flex justify-between text-white p-4">
                 <p>ADD YOUR OWN RECIPE</p>
                 {isHidden ? (
@@ -56,50 +56,103 @@ const Form: React.FC = () => {
             {!isHidden && (
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="flex flex-col p-2 gap-4"
+                    className="flex flex-col p-2 gap-3"
                 >
+                    <label className="flex gap-1 text-white">
+                        Recipe name:
+                        <span className="text-grey opacity-50">(required)</span>
+                    </label>
                     <input
                         {...register("name", { required: true })}
                         className="h-8 rounded p-1"
-                        placeholder="Recipe name"
+                        placeholder="Margarita"
                     />
-                    {errors.name && <span>This field is required</span>}
+                    {errors.name && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
 
-                    <input
+                    <label className="flex gap-1 text-white">
+                        Description:
+                        <span className="text-grey opacity-50">(required)</span>
+                    </label>
+                    <textarea
                         {...register("description", { required: true })}
-                        className="h-8 rounded p-1"
-                        placeholder="Description"
+                        className=" rounded p-1 h-24"
+                        placeholder="One of the world's most famous, and most-loved..."
                     />
-                    {errors.description && <span>This field is required</span>}
+                    {errors.description && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
 
+                    <label className="flex gap-1 text-white">
+                        Ingredients (separated by comma):
+                        <span className="text-grey opacity-50">(required)</span>
+                    </label>
                     <input
                         {...register("ingredients", { required: true })}
                         className="h-8 rounded p-1"
-                        placeholder="The ingredients(writing through a comma)"
+                        placeholder="Tomato, mozzarella, basil leaves"
                     />
-                    {errors.ingredients && <span>This field is required</span>}
+                    {errors.ingredients && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
 
-                    <input
+                    <label className="flex gap-1 text-white">
+                        Manual:
+                        <span className="text-grey opacity-50">(required)</span>
+                    </label>
+                    <textarea
                         {...register("manual", { required: true })}
-                        className="h-8 rounded p-1"
-                        placeholder="Manual"
+                        className="rounded p-1 h-24"
+                        placeholder="Step 1Place salt on small shallow plate..."
                     />
-                    {errors.manual && <span>This field is required</span>}
+                    {errors.manual && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
+
+                    <label className="flex gap-1 text-white">
+                        Cooking Time (minutes):
+                        <span className="text-grey opacity-50">(required)</span>
+                    </label>
                     <input
                         {...register("cookingTime", { required: true })}
                         type="number"
                         className="h-8 rounded p-1"
-                        placeholder="Cooking Time (minutes)"
+                        placeholder="33"
                     />
-                    {errors.cookingTime && <span>This field is required</span>}
+                    {errors.cookingTime && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
 
+                    <label className="flex gap-1 text-white">
+                        Add link for photo:
+                        <span className="text-grey opacity-50">(optional)</span>
+                    </label>
                     <input
                         {...register("avatar")}
                         className="h-8 rounded p-1"
                         placeholder="Add link for photo"
                     />
-                    {errors.avatar && <span>This field is required</span>}
-                    <button className="bg-white text-black" type="submit">
+                    {errors.avatar && (
+                        <span className="text-red-600">
+                            This field is required
+                        </span>
+                    )}
+
+                    <button
+                        className="bg-white uppercase font-bold  w-48 self-center mt-4 p-2 rounded-full text-[#1890ff] hover:bg-slate-200"
+                        type="submit"
+                    >
                         submit
                     </button>
                 </form>
